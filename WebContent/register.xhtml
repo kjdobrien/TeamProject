@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui"> 
+<h:head>
+	<title>Register</title>
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+	    <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
+	
+</h:head>
+<h:body>
+<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.xhtml">UCC Summer Courses</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			<li><img src="images/Crestucc.jpg" alt="ucc crest"></img></li>
+              <li><a href="index.xhtml">Home</a></li>
+			  <li><a href="browseCourses.xhtml">Browse Courses</a></li>
+              <li ><a href="about.html">About</a></li>
+              <li ><a href="contact.html">Contact</a></li>
+              
+			    <li class="offset4">
+             	<h:form>
+             		
+             		<p:commandLink  action="login" rendered="#{empty request.remoteUser}" >Sign In </p:commandLink>
+             		<p:commandLink  action="#{logout.submit}" rendered="#{not empty request.remoteUser}" >Logout</p:commandLink>
+             		
+             	</h:form>
+             </li>  
+             
+			<li id="admin">
+				<h:form>
+					<p:commandLink  action="index" >Admin </p:commandLink>
+				</h:form>
+			</li>
+			  
+			
+            </ul><!-- /.nav -->
+          </div><!--/.nav-collapse -->
+        </div><!-- /.container -->
+      </div><!-- /.navbar-inner -->
+    </div><!-- /.navbar -->
+    
+<div class="container">
+
+
+	<div class="row">
+    	<div class="span4">
+			<h:form id="form">
+<h1>Registration</h1>
+    <p>Enter your details in the fields below. Fields marked with * are mandatory.</p>
+
+	<h:panelGrid columns="2" >
+	<p:outputLabel for="name" value="Name: "  />
+	<p:inputText id="name" required="true" value="#{register.newUser.studentName}"/>
+	
+	<p:outputLabel for="email" value="Email: " />
+	<p:inputText id="email" required="true" value="#{register.newUser.email}"></p:inputText>
+	
+	<p:outputLabel for="dob" value="Birthdate: "/>
+	<p:calendar id="dob" required="true" value="#{register.newUser.birthdate}" />  
+	
+	<p:outputLabel for="gender" value="Gender: "/>
+	<p:selectOneMenu id="gender" value="#{register.newUser.gender}" required="true">  
+            <f:selectItem itemLabel="Choose Gender" itemValue="" />  
+            <f:selectItem itemLabel="Male" itemValue="male" />  
+            <f:selectItem itemLabel="Female" itemValue="female" />  
+     </p:selectOneMenu>  
+	
+	<p:outputLabel for="nationality" value="Nationality: "/>
+	<p:selectOneMenu id="nationality" value="#{register.newUser.nationality}" required="true">  
+            <f:selectItem itemLabel="Choose Nationality" itemValue="" />  
+            <f:selectItem itemLabel="Irish" itemValue="irish" />  
+            <f:selectItem itemLabel="English" itemValue="english" />  
+     </p:selectOneMenu>
+       
+	<p:outputLabel for="telephone" value="Telephone: "/>
+	<p:inputText id="telephone" required="true" value="#{register.newUser.telephone}"/>
+	
+	<p:outputLabel for="password" value="Password: " required="true"/>
+	<p:password id="password" required="true"  value="#{register.newUser.password}"/>
+	
+	<p:outputLabel for="eduLevel" value="Education Level: "/>
+	<p:selectOneMenu id="eduLevel" value="#{register.newUser.educationLevel}" required="true">  
+            <f:selectItem itemLabel="Choose Education Level" itemValue="" />  
+            <f:selectItem itemLabel="Second level" itemValue="second level" />  
+            <f:selectItem itemLabel="Undergraduate" itemValue="undergraduate" />  
+            <f:selectItem itemLabel="Graduate" itemValue="graduate" />
+            <f:selectItem itemLabel="Post-graduate" itemValue="post-graduate" />
+     </p:selectOneMenu>
+	
+	<p:commandButton value="Register" action="#{register.registerUser}" />
+	
+	</h:panelGrid>
+</h:form>
+</div>
+
+	<div class="span4">
+	
+	</div>
+	
+	<div class="span4">
+	<img src="images/orb.jpg" alt="picture of the O'Rahilly Building"></img>
+	</div>
+	
+	
+</div>
+</div>
+
+ <footer>
+        <small>Copyright 2013 &copy; University College Cork</small>
+      </footer>
+</h:body>
+</html>

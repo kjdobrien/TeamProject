@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui"> 
+<h:head>
+	<title>Browse Courses</title>
+	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>
+<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          
+			 <a class="brand" href="index.html">UCC Summer Courses</a>
+				<div class="nav-collapse">
+				<ul class="nav">
+			  <li><img src="../images/Crestucc.jpg" alt="ucc crest"></img></li>
+              <li><a href="index.xhtml">Home</a></li>
+			  <li><a href="browseCourses.xhtml">Browse Courses</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+               <li class="offset4">
+             	<h:form>
+             		
+             		<p:commandLink  action="login" rendered="#{empty request.remoteUser}" >Sign In </p:commandLink>
+             		<p:commandLink  action="#{logout.submit}" rendered="#{not empty request.remoteUser}" >Logout</p:commandLink>
+             		
+             	</h:form>
+             </li>  
+        
+              </ul>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="subnav">
+<h:form>
+
+    <p:growl id="messages"/>
+
+    <p:menubar>
+        
+		<p:menuitem value="Enquiries" url="enquiries_admin.xhtml"  />
+		<p:menuitem value="Browse Courses" url="browseCourses_admin.xhtml" />
+		<p:menuitem value="Edit Courses" url="editCourse.xhtml"  />
+        <p:menuitem value="Users" url="viewUsersOnCourse.xhtml"  />
+    </p:menubar>
+
+</h:form>
+			
+</div>
+<div class="container">
+<h:form id="form">
+	<p:dataTable var="currentEnquiry" widgetVar="enquiryTable" value="#{adminEnquiry.enquiries}" filteredValue="#{adminEnquiry.filteredEnquiries}"> 
+	
+		<f:facet name="header">  
+            <p:outputPanel>  
+                <h:outputText value="Search all fields:" />  
+                <p:inputText id="globalFilter" onkeyup="enquiryTable.filter()" style="width:150px" />  
+            </p:outputPanel>  
+        </f:facet>
+	
+		<p:column style="width:2%">  
+            <p:rowToggler />  
+        </p:column>  
+         
+        <p:column sortBy="#{currentEnquiry.user.studentName}" headerText="User">  
+            <h:outputText value="#{currentEnquiry.user.studentName}" />  
+        </p:column>  
+  		
+  		<p:column sortBy="#{currentEnquiry.course.title}" headerText="Course">  
+            <h:outputText value="#{currentEnquiry.course.title}" />  
+        </p:column>  
+  		
+        <p:column sortBy="#{currentEnquiry.subject}" headerText="Subject">  
+            <h:outputText value="#{currentEnquiry.subject}" />  
+        </p:column>
+        
+        <p:column sortBy="#{currentEnquiry.date}" headerText="Received:">  
+            <h:outputText value="#{currentEnquiry.date}" />  
+        </p:column>
+        <p:rowExpansion>  
+            <h:panelGrid id="display" columns="2" cellpadding="4" style="width:300px;"  
+                            styleClass=" ui-widget-content grid">  
+  				<h:outputText value="#{currentEnquiry.message}" />
+            </h:panelGrid>  
+            <p:commandButton value="Reply" actionListener="#{adminEnquiry.composeReply}" oncomplete="replyDialog.show()" />
+        </p:rowExpansion>  
+    </p:dataTable>  
+	
+</h:form>
+
+<h:form id="replyForm">
+		<p:dialog header="Reply to enquiry" widgetVar="replyDialog" modal="true" draggable="false">
+			<p:messages id="enqMsg" />
+			<p:outputPanel id="replyToEnquiry" style="text-align:center;"
+				layout="block">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="enquiry" value="Message: " />
+					<p:inputTextarea id="enquiry" required="true"  requiredMessage="Message required" value="#{adminEnquiry.replyMessage}" />
+					
+					<p:commandButton value="Send" id="sendEnquiry" actionListener="#{adminEnquiry.reply}"  ajax="true" update="enqMsg" />
+
+				</h:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
+		
+
+</div> 
+</h:body>
+</html>

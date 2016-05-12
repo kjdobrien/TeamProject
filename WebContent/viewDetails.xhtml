@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>View Details</title>
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+	    
+	
+	
+</h:head>
+<h:body>
+
+<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          
+			 <a class="brand" href="index.xhtml">UCC Summer Courses</a>
+				<div class="nav-collapse">
+				<ul class="nav">
+			  <li><img src="images/Crestucc.jpg" alt="ucc crest"></img></li>
+              <li><a href="index.xhtml">Home</a></li>
+			  <li><a href="browseCourses.xhtml">Browse Courses</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+               <li class="offset4">
+             	<h:form>
+             		
+             		<p:commandLink  action="login" rendered="#{empty request.remoteUser}" >Sign In </p:commandLink>
+             		<p:commandLink  action="#{logout.submit}" rendered="#{not empty request.remoteUser}" >Logout</p:commandLink>
+             		
+             	</h:form>
+             </li>  
+        
+              </ul>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<h:form id="form">
+		<h3>
+			<h:outputText value="#{browseCourses.selectedCourse.title}" />
+		</h3>
+		<p>
+			<strong>Fee:</strong>&euro;<h:outputText value="#{browseCourses.selectedCourse.fee}" />
+		</p>
+		<p>
+			<strong>Start Date:</strong><h:outputText value="#{browseCourses.selectedCourse.startDate}" />
+		</p>
+		<p>
+			<strong>End Date:</strong><h:outputText value="#{browseCourses.selectedCourse.endDate}" />
+		</p>
+			<h:graphicImage value="images/courses/#{browseCourses.selectedCourse.image}" />
+		<p>
+			<h:outputText value="#{browseCourses.selectedCourse.description}" />
+		</p>
+		<p:commandButton value="Enroll"
+			action="#{enroll.enrollInCourse}" ajax="true" rendered="#{not empty request.remoteUser}" />
+		<p:commandButton value="Make Enquiry"
+			 ajax="true" oncomplete="enqDialog.show()" rendered="#{not empty request.remoteUser}" />
+	</h:form>
+	<h:form id="enquiryForm">
+		<p:dialog header="Make enquiry" widgetVar="enqDialog" modal="true" draggable="false">
+			<p:messages id="enqMsg" />
+			<p:outputPanel id="makeEnquiry" style="text-align:center;"
+				layout="block">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="subject" value="Subject: " />
+					<p:inputText id="subject" required="true" requiredMessage="Subject required" value="#{enquiry.subject}"/>
+					<h:outputLabel for="enquiry" value="Message: " />
+					<p:inputTextarea id="enquiry" required="true" requiredMessage="Message required" value="#{enquiry.message}" />
+					
+					<p:commandButton value="send" id="sendEnquiry" action="#{enquiry.sendEnquiry}" onComplete="enqDialog.hide()" ajax="true" update="enqMsg" />
+
+				</h:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
+</div>
+
+
+</h:body>
+</html>

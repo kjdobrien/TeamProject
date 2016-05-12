@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>UCC Summer Courses</title>
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+	    <link href="css/bootstrap-responsive.css" rel="stylesheet" />
+	
+</h:head>
+<h:body>
+<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          
+			 <a class="brand" href="index.xhtml">UCC Summer Courses</a>
+				<div class="nav-collapse">
+				<ul class="nav">
+			  <li><img src="images/Crestucc.jpg" alt="ucc crest"></img></li>
+              <li class="active"><a href="index.xhtml">Home</a></li>
+			  <li ><a href="browseCourses.xhtml">Browse Courses</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+                <li class="offset4">
+             	<h:form>
+             		
+             		<p:commandLink  action="login" rendered="#{empty request.remoteUser}" >Sign In </p:commandLink>
+             		<p:commandLink  action="#{logout.submit}" rendered="#{not empty request.remoteUser}" >Logout</p:commandLink>
+             		
+             	</h:form>
+             </li>  
+             
+		
+              </ul>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+ <!--  Carousel -->
+      <!--  consult Bootstrap docs at 
+            http://twitter.github.com/bootstrap/javascript.html#carousel -->
+      <div id="this-carousel-id" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="item active">
+            <a href="viewDetails.xhtml">  <img src="images/blackboard.jpg" alt="Antennae Galaxies" />
+            </a>
+            <div class="carousel-caption">
+              <p>Introduction to Quantum Mechanics</p>
+              <p><a class="btn btn-primary btn-large" href="viewDetails.xhtml">
+      View details
+    </a></p>
+            </div>
+          </div>
+          <div class="item">
+            <a href="http://hubblesite.org/gallery/album/entire/pr2007016e/xlarge_web/npp/128/">
+              <img src="images/antennae.jpg" alt="Course" />
+            </a>
+            <div class="carousel-caption">
+              <p>Some other Course</p>
+              <p><a class="btn btn-primary btn-large" href="course_details.html">
+      View details
+    </a></p>
+            </div>
+          </div>
+		   <div class="item">
+            <a href="http://hubblesite.org/gallery/album/entire/pr2007016e/xlarge_web/npp/128/">
+              <img src="images/carina.jpg" alt="Course" />
+            </a>
+            <div class="carousel-caption">
+              <p>Some other Course</p>
+              <p><a class="btn btn-primary btn-large" href="course_details.html">
+      View details
+    </a></p>
+            </div>
+          </div>
+		   <div class="item">
+            <a href="http://hubblesite.org/gallery/album/entire/pr2007016e/xlarge_web/npp/128/">
+              <img src="images/echo.jpg" alt="Course" />
+            </a>
+            <div class="carousel-caption">
+              <p>Some other Course</p>
+              <p><a class="btn btn-primary btn-large" href="course_details.html">
+      View details
+    </a></p>
+            </div>
+          </div>
+		  
+        </div><!-- .carousel-inner -->
+        <!--  next and previous controls here
+              href values must reference the id for this carousel -->
+          <a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
+      </div>
+      <div class="row">
+        <div class="span4">
+          <h2>UCC Summer Courses</h2>
+           <p>Welcome to the UCC Summer courses website. Here you will find all the 
+           	information you need on the courses available in the summer months. 
+           	Registration is quick and easy, just navigate to the top right corner of the screen
+           	to begin!  </p>
+        </div>
+      </div>
+</div>
+      
+
+<script src="js/jquery-1.7.2.min.js"></script>
+   
+    <!-- Bootstrap jQuery plugins compiled and minified -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('.carousel').carousel({
+          interval: 4000
+        });
+      });
+    </script>
+
+	<h:form id="form">
+		
+	</h:form>
+	
+
+</h:body>
+</html>

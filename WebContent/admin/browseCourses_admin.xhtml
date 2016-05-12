@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui"> 
+<h:head>
+	<title>Admin - Browse Courses</title>
+	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>
+<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          
+			 <a class="brand" href="index.xhtml">UCC Summer Courses</a>
+				<div class="nav-collapse">
+				<ul class="nav">
+			  <li><img src="../images/Crestucc.jpg" alt="ucc crest"></img></li>
+              <li> <a href="index.html">Home</a></li>
+			  <li ><a href="browseCourses.xhtml">Browse Courses</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+                <li class="offset4">
+             	<h:form>
+             		
+             		<p:commandLink  action="login" rendered="#{empty request.remoteUser}" >Sign In </p:commandLink>
+             		<p:commandLink  action="#{logout.submit}" rendered="#{not empty request.remoteUser}" >Logout</p:commandLink>
+             		
+             	</h:form>
+             </li>  
+             
+		
+              </ul>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="subnav">
+<h:form>
+
+    <p:growl id="messages"/>
+
+    <p:menubar>
+        
+		<p:menuitem value="Enquiries" url="enquiries_admin.xhtml"  />
+		<p:menuitem value="Browse Courses" url="browseCourses_Admin" />
+		<p:menuitem value="Edit Courses" url="editCourse.xhtml"  />
+        <p:menuitem value="Users" url="viewUsersOnCourse"  />
+    </p:menubar>
+
+</h:form>
+			
+</div>
+<div class="container">
+<h1>Browse Courses</h1>
+
+
+<h:form id="form">
+
+	<p:dataTable var="course" widgetVar="courseTable" value="#{adminBrowseCourses.courses}" filteredValue="#{adminEnquiry.filteredEnquiries}"> 
+	
+		<f:facet name="header">  
+            <p:outputPanel>  
+                <h:outputText value="Search all fields:" />  
+                <p:inputText id="globalFilter" onkeyup="courseTable.filter()" style="width:150px" />  
+            </p:outputPanel>  
+        </f:facet>
+	
+		<p:column style="width:2%">  
+            <p:rowToggler />  
+        </p:column>  
+         
+        <p:column sortBy="#{course.title}" headerText="Title">  
+            <h:outputText value="#{course.title}" />  
+        </p:column>  
+         <p:column sortBy="#{course.department}" headerText="Department">  
+            <h:outputText value="#{course.title}" />  
+        </p:column>
+        <p:column sortBy="#{course.startDate}" headerText="Starts">  
+            <h:outputText value="#{course.startDate}" />  
+        </p:column>
+        <p:column sortBy="#{course.endDate}" headerText="Ends">  
+            <h:outputText value="#{course.endDate}" />  
+        </p:column>
+        <p:rowExpansion>  
+            <h:panelGrid id="display" columns="2" cellpadding="4" style="width:300px;"  
+                            styleClass=" ui-widget-content grid">  
+  				<h:outputText value="#{course.description}" />
+            </h:panelGrid>  
+            <p:commandButton value="Edit" action="editCourse" >
+            	<f:setPropertyActionListener value="#{course}"   
+                            target="#{adminBrowseCourses.selectedCourse}" /> 
+            </p:commandButton>
+            <p:commandButton value="View students" action="viewUsersOnCourse">
+            	<f:setPropertyActionListener value="#{course}" target="#{viewUsers.selectedCourse}" />
+            </p:commandButton>
+        </p:rowExpansion>  
+    </p:dataTable>  
+    <p:commandButton value="Edit" action="editCourse" />
+	
+</h:form>
+		
+</div>
+
+</h:body>
+</html>

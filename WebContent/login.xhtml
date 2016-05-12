@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Login</title>
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          
+			 <a class="brand" href="index.html">UCC Summer Courses</a>
+				<div class="nav-collapse">
+				<ul class="nav">
+			  <li><img src="images/Crestucc.jpg" alt="ucc crest"></img></li>
+              <li><a href="index.xhtml">Home</a></li>
+			  <li class="active"><a href="#">Browse Courses</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li class="offset4"><a  href="login.xhtml" >Sign In </a></li> 
+              </ul>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<h:form id="login">
+		<h:panelGrid columns="3">
+			<h:outputLabel for="username" value="Username:" />
+			<h:inputText id="username" required="true" />
+			<h:message for="username" />
+
+			<h:outputLabel for="password" value="Password" />
+			<h:inputSecret id="password" required="true" />
+			<h:message for="password" />
+
+			<h:outputLabel for="rememberMe" value="Remember Me" />
+			<h:selectBooleanCheckbox id="rememberMe" />
+			<h:panelGroup />
+
+			<h:panelGroup />
+			<h:commandButton value="Login" />
+			<h:panelGroup styleClass="error"
+				rendered="#{not facesContext.validationFailed}">
+                #{shiroLoginFailure}
+            </h:panelGroup>
+		</h:panelGrid>
+	</h:form>
+	<a href="register.xhtml">Not Registered?</a>
+</div>
+</h:body>
+</html>
